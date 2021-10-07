@@ -62,6 +62,7 @@ export default function App() {
             coordinates={coordinates}
             setCoordinates={setCoordinates}
             setBounds={setBounds}
+            places={filteredPlaces.length > 0 ? filteredPlaces : places}
           />
         </Grid>
       </Grid>
