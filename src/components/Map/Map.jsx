@@ -10,6 +10,7 @@ export default function Map({
   setCoordinates,
   setBounds,
   places,
+  setChildClicked,
 }) {
   const classes = useStyles();
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -30,7 +31,7 @@ export default function Map({
             sw: e.marginBounds.sw,
           });
         }}
-        onChildClick={() => {}}
+        onChildClick={(child) => setChildClicked(child)}
       >
         {places?.map((place, i) => (
           <div

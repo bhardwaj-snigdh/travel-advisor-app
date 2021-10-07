@@ -1,3 +1,4 @@
+import { createRef, useEffect, useState } from 'react';
 import {
   CircularProgress,
   FormControl,
@@ -13,13 +14,22 @@ import useStyles from './styles';
 
 export default function List({
   places,
+  childClicked,
   isLoading,
   type,
   setType,
   ratings,
   setRatings,
 }) {
+  const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
+
+  useEffect(() => {
+    const refs = Array(places.length)
+      .fill(null)
+      .map((_, i) => elRefs[i] ?? createRef());
+    setElRefs(refs);
+  }, [places]);
 
   return (
     <div className={classes.container}>
@@ -52,8 +62,12 @@ export default function List({
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
             {places?.map((place, i) => (
-              <Grid item key={i} xs={12}>
-                <PlaceDetails place={place} />
+              <Grid item ref={elRefs[i]} key={i} xs={12}>
+                <PlaceDetails
+                  place={place}
+                  selected={Number(childClicked) === i}
+                  refProp={elRefs[i]}
+                />
               </Grid>
             ))}
           </Grid>

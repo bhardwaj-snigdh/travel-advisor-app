@@ -8,6 +8,7 @@ import Map from './components/Map';
 
 export default function App() {
   const [places, setPlaces] = useState([]);
+  const [childClicked, setChildClicked] = useState(null);
   const [filteredPlaces, setFilteredPlaces] = useState([]);
 
   const [coordinates, setCoordinates] = useState({});
@@ -50,6 +51,7 @@ export default function App() {
         <Grid item xs={12} md={4}>
           <List
             places={filteredPlaces.length > 0 ? filteredPlaces : places}
+            childClicked={childClicked}
             isLoading={isLoading}
             type={type}
             setType={setType}
@@ -63,6 +65,7 @@ export default function App() {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             places={filteredPlaces.length > 0 ? filteredPlaces : places}
+            setChildClicked={setChildClicked}
           />
         </Grid>
       </Grid>

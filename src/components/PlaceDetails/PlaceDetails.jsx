@@ -13,15 +13,18 @@ import { Rating } from '@material-ui/lab';
 
 import useStyles from './styles';
 
-export default function PlaceDetails({ place }) {
+export default function PlaceDetails({ place, selected, refProp }) {
   const classes = useStyles();
+
+  if (selected)
+    refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   return (
     <Card elevation={6}>
       <CardMedia
         style={{ height: 350 }}
         image={
-          place.photo?.images.large.url ??
+          place.photo?.images?.large?.url ??
           'https://b2303ztyja-flywheel.netdna-ssl.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'
         }
         title={place.name}
